@@ -21,4 +21,4 @@ Criação de um Banco Comunitário da Reprograma.
 
 ### Diagrama ERD
 
-![Diagrama ERD](images/diagrama_erd.png)
+![Diagrama ERD]()
