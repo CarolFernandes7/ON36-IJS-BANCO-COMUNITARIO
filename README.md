@@ -17,10 +17,11 @@ Criação de um Banco Comunitário da Reprograma.
 - Recebimento de aposentadorias e outros valores governamentais.
 - Gerentes da conta.
 - Prestação de contas diário e semanal para toda a comunidade.
-- Desafio extra: Moeda social circulante local.
+-  Moeda social circulante local.
 
 ### Diagrama ERD
 
+Semana 01: Modelagem
 ![Diagrama ERD](diagrama.jpeg)
 
 
