@@ -21,14 +21,6 @@ Criação de um Banco Comunitário da Reprograma.
 
 ### Diagrama ERD
 
-![Diagrama ERD](images/diagrama_erd.png)
-' > README.md
+![Diagrama ERD]()
 
-# Adicionar arquivos ao Git
-git add README.md images/diagrama_erd.png
 
-# Fazer o commit
-git commit -m "Adiciona descrição do diagrama ERD e imagem do desenho"
-
-# Empurrar (push) para o GitHub
-git push origin main
