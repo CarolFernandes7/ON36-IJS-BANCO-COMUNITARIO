@@ -1,0 +1,93 @@
+abstract class ContaBancaria {
+  constructor(public numeroConta: string, protected saldo: number) {}
+
+  sacar(valor: number): void {
+    if (this.saldo >= valor) {
+      this.saldo -= valor;
+      console.log(`Saque de R$${valor} realizado com sucesso.`);
+    } else {
+      console.log("Saldo insuficiente.");
+    }
+  }
+
+  depositar(valor: number): void {
+    this.saldo += valor;
+    console.log(`Depósito de R$${valor} realizado com sucesso.`);
+  }
+
+  transferir(valor: number, contaDestino: ContaBancaria): void {
+    if (this.saldo >= valor) {
+      this.sacar(valor);
+      contaDestino.depositar(valor);
+      console.log(`Transferência de R$${valor} para a conta ${contaDestino.getNumeroConta()} realizada com sucesso.`);
+    } else {
+      console.log("Saldo insuficiente para transferência.");
+    }
+  }
+
+  getNumeroConta(): string {
+    return this.numeroConta;
+  }
+
+  getSaldo(): number {
+    return this.saldo;
+  }
+}
+
+class ContaCorrente extends ContaBancaria {
+  constructor(numeroConta: string, saldoInicial: number, private limiteChequeEspecial: number) {
+    super(numeroConta, saldoInicial);
+  }
+
+  sacar(valor: number): void {
+    if (this.saldo + this.limiteChequeEspecial >= valor) {
+      this.saldo -= valor;
+      console.log(`Saque de R$${valor} realizado com sucesso.`);
+    } else {
+      console.log("Saldo insuficiente, mesmo considerando o cheque especial.");
+    }
+  }
+}
+
+class ContaPoupanca extends ContaBancaria {
+  constructor(numeroConta: string, saldoInicial: number, private taxaJuros: number) {
+    super(numeroConta, saldoInicial);
+  }
+
+  aplicarJuros(): void {
+    this.saldo += this.saldo * this.taxaJuros;
+    console.log(`Juros aplicados. Novo saldo: R$${this.saldo}`);
+  }
+}
+
+class Cliente {
+  private contas: ContaBancaria[] = [];
+
+  constructor(
+    public nomeCompleto: string,
+    public id: string,
+    public endereco: string,
+    public telefone: string
+  ) {}
+
+  adicionarConta(conta: ContaBancaria): void {
+    this.contas.push(conta);
+  }
+
+  // Getters e Setters
+}
+
+// Exemplo de uso
+
+const cliente1 = new Cliente("João Silva", "123456", "Rua A, 123", "99999-9999");
+const contaCorrente = new ContaCorrente("001", 1000.0, 500.0);
+const contaPoupanca = new ContaPoupanca("002", 2000.0, 0.05);
+
+cliente1.adicionarConta(contaCorrente);
+cliente1.adicionarConta(contaPoupanca);
+
+contaCorrente.depositar(200.0);
+contaCorrente.sacar(500.0);
+contaCorrente.transferir(300.0, contaPoupanca);
+
+contaPoupanca.aplicarJuros();
